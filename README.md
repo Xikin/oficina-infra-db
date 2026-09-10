@@ -4,15 +4,15 @@ Infraestrutura como código do **banco de dados gerenciado** da Oficina Mecânic
 Repositório 3 de 4 do Tech Challenge — Fase 3.
 
 Provisiona um **Amazon RDS PostgreSQL** nas subnets privadas da VPC criada por
-[oficina-infra-k8s](../oficina-infra-k8s), substituindo o `Deployment` de Postgres
+[oficina-infra-k8s](https://github.com/Xikin/oficina-infra-k8s), substituindo o `Deployment` de Postgres
 que rodava dentro do cluster na Fase 2.
 
 | Repositório | Papel |
 | --- | --- |
-| [oficina-auth-lambda](../oficina-auth-lambda) | Function serverless de autenticação por CPF + API Gateway |
-| [oficina-infra-k8s](../oficina-infra-k8s) | VPC + cluster EKS + metrics-server |
+| [oficina-auth-lambda](https://github.com/Xikin/oficina-auth-lambda) | Function serverless de autenticação por CPF + API Gateway |
+| [oficina-infra-k8s](https://github.com/Xikin/oficina-infra-k8s) | VPC + cluster EKS + metrics-server |
 | **oficina-infra-db** (este) | RDS PostgreSQL gerenciado |
-| [oficina-mvp](../oficina-mvp) | Aplicação principal executando no cluster |
+| [oficina-mvp](https://github.com/Xikin/tech_challenge) | Aplicação principal executando no cluster |
 
 ---
 
@@ -88,7 +88,7 @@ que é a fonte do painel de queries lentas no New Relic.
 ## Por que PostgreSQL gerenciado
 
 A justificativa formal da escolha do motor e do modelo relacional está em
-[oficina-mvp/docs/modelo-de-dados.md](../oficina-mvp/docs/modelo-de-dados.md),
+[oficina-mvp/docs/modelo-de-dados.md](https://github.com/Xikin/tech_challenge/blob/main/docs/modelo-de-dados.md),
 com o diagrama ER e a explicação dos relacionamentos.
 
 Em resumo, o que muda em relação à Fase 2 não é o motor — continua PostgreSQL —
@@ -135,7 +135,7 @@ aws ssm get-parameter \
 
 As migrations do Prisma são aplicadas pela **aplicação**, não por esta stack: o
 `CMD` do container roda `npx prisma migrate deploy` no start. Ver
-[oficina-mvp](../oficina-mvp).
+[oficina-mvp](https://github.com/Xikin/tech_challenge).
 
 ### Destruir entre sessões de estudo
 
@@ -182,4 +182,4 @@ o laboratório — num ambiente real ambos seriam o oposto.
 ## API
 
 Este repositório não expõe API. A API da oficina é documentada em
-[oficina-mvp](../oficina-mvp) — Swagger em `/docs` e collection Postman versionada.
+[oficina-mvp](https://github.com/Xikin/tech_challenge) — Swagger em `/docs` e collection Postman versionada.
