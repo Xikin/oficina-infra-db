@@ -22,9 +22,9 @@ variable "environment" {
 }
 
 variable "engine_version" {
-  description = "Versão do PostgreSQL. Alinhada com a imagem postgres:16 usada em desenvolvimento."
+  description = "Versão major do PostgreSQL. Só a major é fixada: a AWS descontinua versões menores (a 16.4 já não é oferecida) e auto_minor_version_upgrade cuida dos patches."
   type        = string
-  default     = "16.4"
+  default     = "16"
 }
 
 variable "instance_class" {

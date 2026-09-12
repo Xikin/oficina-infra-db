@@ -78,7 +78,7 @@ que é a fonte do painel de queries lentas no New Relic.
 | Camada | Tecnologia |
 | --- | --- |
 | IaC | Terraform ~> 1.10 (backend S3 com lock nativo) |
-| Banco | Amazon RDS PostgreSQL 16.4, `db.t3.micro`, gp3 criptografado |
+| Banco | Amazon RDS PostgreSQL 16, `db.t3.micro`, gp3 criptografado |
 | Segredos | SSM Parameter Store (SecureString, KMS gerenciada) |
 | Observabilidade | Performance Insights + export de logs para CloudWatch |
 | CI/CD | GitHub Actions — `plan` no PR, `apply` no merge |

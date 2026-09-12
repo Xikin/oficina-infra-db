@@ -6,7 +6,7 @@ region      = "us-east-1"
 project     = "oficina"
 environment = "prod" # ou "homolog"
 
-engine_version = "16.4"
+engine_version = "16" # só a major; a AWS descontinua versões menores
 instance_class = "db.t3.micro" # elegível ao free tier: 750h/mês
 
 allocated_storage     = 20 # free tier cobre até 20 GB
