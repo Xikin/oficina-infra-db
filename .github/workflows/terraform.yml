@@ -108,16 +108,18 @@ jobs:
 
       - name: Resumo do banco
         if: github.event_name == 'push'
+        # terraform-bin: o wrapper do setup-terraform (necessário para comentar o plan
+        # no PR) acrescenta linhas extras à saída capturada por $(terraform output).
         run: |
           {
             echo "## RDS PostgreSQL provisionado"
             echo ""
             echo "| Recurso | Valor |"
             echo "| --- | --- |"
-            echo "| Endpoint | \`$(terraform output -raw db_endpoint)\` |"
-            echo "| Banco | \`$(terraform output -raw db_name)\` |"
-            echo "| Usuário | \`$(terraform output -raw db_username)\` |"
-            echo "| DATABASE_URL | SSM \`$(terraform output -raw database_url_ssm_parameter)\` |"
+            echo "| Endpoint | \`$(terraform-bin output -raw db_endpoint)\` |"
+            echo "| Banco | \`$(terraform-bin output -raw db_name)\` |"
+            echo "| Usuário | \`$(terraform-bin output -raw db_username)\` |"
+            echo "| DATABASE_URL | SSM \`$(terraform-bin output -raw database_url_ssm_parameter)\` |"
             echo ""
             echo "A senha nunca aparece em log: fica apenas no SSM como SecureString."
           } >> "$GITHUB_STEP_SUMMARY"
