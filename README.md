@@ -183,3 +183,7 @@ o laboratório — num ambiente real ambos seriam o oposto.
 
 Este repositório não expõe API. A API da oficina é documentada em
 [oficina-mvp](https://github.com/Xikin/tech_challenge) — Swagger em `/docs` e collection Postman versionada.
+
+## Documentação
+
+- [Notas de implementação](docs/notas-de-implementacao.md) — o porquê das escolhas do código e da configuração, por arquivo

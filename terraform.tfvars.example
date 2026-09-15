@@ -1,22 +1,17 @@
-# Copie para terraform.tfvars e ajuste se necessário.
-# A rede (VPC e subnets privadas) NÃO é configurada aqui — vem do SSM,
-# publicada pela stack oficina-infra-k8s.
-
 region      = "us-east-1"
 project     = "oficina"
-environment = "prod" # ou "homolog"
+environment = "prod"
 
-engine_version = "16" # só a major; a AWS descontinua versões menores
-instance_class = "db.t3.micro" # elegível ao free tier: 750h/mês
+engine_version = "16"
+instance_class = "db.t3.micro"
 
-allocated_storage     = 20 # free tier cobre até 20 GB
-max_allocated_storage = 50 # autoscaling de storage; 0 desliga
+allocated_storage     = 20
+max_allocated_storage = 50
 
 db_name     = "oficina_db"
 db_username = "oficina"
 
 backup_retention_period = 7
 
-# Ambos dobrariam custo / atrapalhariam o destroy rotineiro do lab.
 multi_az            = false
 deletion_protection = false

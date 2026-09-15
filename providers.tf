@@ -16,14 +16,6 @@ locals {
   ssm_prefix = "/${var.project}/${var.environment}"
 }
 
-# ---------------------------------------------------------------------------
-# Rede provisionada por oficina-infra-k8s
-#
-# Lida do SSM Parameter Store em vez de terraform_remote_state: evita dar a
-# este repositório acesso de leitura ao state do outro, e mantém o contrato
-# entre as stacks explícito e inspecionável pelo console da AWS.
-# ---------------------------------------------------------------------------
-
 data "aws_ssm_parameter" "vpc_id" {
   name = "${local.ssm_prefix}/network/vpc_id"
 }
