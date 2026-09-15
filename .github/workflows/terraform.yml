@@ -16,8 +16,6 @@ concurrency:
   group: terraform-db-${{ github.ref_name }}
   cancel-in-progress: false
 
-# Menor privilégio por padrão; o job declara o que precisa a mais
-# (pull-requests: write para comentar o plan).
 permissions:
   contents: read
 
@@ -108,8 +106,6 @@ jobs:
 
       - name: Resumo do banco
         if: github.event_name == 'push'
-        # terraform-bin: o wrapper do setup-terraform (necessário para comentar o plan
-        # no PR) acrescenta linhas extras à saída capturada por $(terraform output).
         run: |
           {
             echo "## RDS PostgreSQL provisionado"
