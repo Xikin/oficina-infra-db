@@ -1,15 +1,3 @@
-# ---------------------------------------------------------------------------
-# Security groups
-#
-# Dois grupos, para que o acesso ao banco seja concedido por identidade e não
-# por faixa de IP:
-#
-#   db_client -> SG "crachá". Quem o anexa ganha acesso ao banco.
-#                A Lambda de autenticação usa este, lendo o ID pelo SSM.
-#   database  -> SG do RDS. Só aceita 5432 vindo do SG dos nós do EKS e do
-#                SG de cliente. Sem CIDR aberto, sem 0.0.0.0/0.
-# ---------------------------------------------------------------------------
-
 resource "aws_security_group" "db_client" {
   name        = "${local.name}-db-client"
   description = "Concede acesso ao PostgreSQL a quem anexa este security group"
@@ -46,8 +34,6 @@ resource "aws_vpc_security_group_ingress_rule" "from_db_clients" {
   ip_protocol                  = "tcp"
 }
 
-# O RDS não inicia conexões de saída, mas o SG exige uma regra de egress
-# explícita para não herdar o "permitir tudo" default.
 resource "aws_vpc_security_group_egress_rule" "database_none" {
   security_group_id = aws_security_group.database.id
   description       = "Sem trafego de saida iniciado pelo banco"
