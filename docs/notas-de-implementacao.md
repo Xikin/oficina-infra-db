@@ -78,3 +78,12 @@ vem do SSM, publicada pela stack oficina-infra-k8s.
   comentar o plan no PR) acrescenta linhas extras à saída capturada por `$(terraform output)`.
 - As actions são fixadas por SHA de commit, com a versão legível no comentário `# vX.Y.Z` ao lado de cada `uses:`.
   O `.github/dependabot.yml` mantém os SHAs atualizados; sem ele, o pin congelaria as actions para sempre.
+
+---
+
+## `execucao.tf` (Fase 4)
+
+- Instância separada, e não um segundo *database* na mesma instância: o requisito é banco próprio por serviço, e com instâncias separadas a carga, as janelas de manutenção e uma eventual restauração de um serviço não afetam o outro.
+- Reaproveita o *subnet group*, o *parameter group* e o security group da instância do OS Service. As duas aceitam conexão dos nós do EKS; o isolamento entre os serviços é pela credencial, que cada pipeline recebe separadamente. Separar também por rede exigiria *security groups for pods*, que o Learner Lab não permite configurar com a `LabRole`.
+- Mesma classe e versão da instância principal (`var.instance_class`, `var.engine_version`), para não multiplicar variáveis num ambiente de avaliação.
+
