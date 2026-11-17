@@ -85,3 +85,15 @@ variable "deletion_protection" {
   type        = bool
   default     = false
 }
+
+variable "execucao_db_name" {
+  description = "Banco do serviço de execução (catálogo, estoque e fila); instância própria, sem acesso do OS Service"
+  type        = string
+  default     = "execucao_db"
+}
+
+variable "execucao_db_username" {
+  description = "Usuário master do banco do serviço de execução"
+  type        = string
+  default     = "execucao"
+}

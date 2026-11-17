@@ -1,14 +1,27 @@
 # oficina-infra-db
 
-Infraestrutura como código do **banco de dados gerenciado** da Oficina Mecânica.
-Repositório 3 de 4 do Tech Challenge — Fase 3.
+Infraestrutura como código dos **bancos relacionais gerenciados** da Oficina Mecânica.
+Tech Challenge — Fase 4.
 
-Provisiona um **Amazon RDS PostgreSQL** nas subnets privadas da VPC criada por
-[oficina-infra-k8s](https://github.com/Xikin/oficina-infra-k8s), substituindo o `Deployment` de Postgres
-que rodava dentro do cluster na Fase 2.
+Cria **duas instâncias RDS PostgreSQL**, uma por microsserviço que usa banco relacional:
+
+| Instância | Dono | Parâmetro no SSM |
+| --- | --- | --- |
+| `oficina-<env>-postgres` | OS Service | `/oficina/<env>/db/database_url` |
+| `oficina-<env>-execucao-postgres` | Execução e Produção | `/oficina/<env>/db/execucao_database_url` |
+
+Cada serviço recebe só a própria credencial, de modo que nenhum acessa o banco do outro. O Billing usa MongoDB, provisionado pelo próprio repositório dele.
 
 | Repositório | Papel |
 | --- | --- |
+| [oficina-mvp](https://github.com/Xikin/tech_challenge) | OS Service — clientes, veículos, OS, orquestração da saga |
+| [oficina-execucao](https://github.com/Xikin/oficina-execucao) | Execução e Produção |
+| [oficina-billing](https://github.com/Xikin/oficina-billing) | Orçamento e Pagamento |
+| [oficina-auth-lambda](https://github.com/Xikin/oficina-auth-lambda) | Autenticação por CPF + API Gateway |
+| [oficina-infra-k8s](https://github.com/Xikin/oficina-infra-k8s) | VPC, EKS, ECR, RabbitMQ |
+| **oficina-infra-db** (este) | RDS do OS Service e do Execução |
+
+--- | --- |
 | [oficina-auth-lambda](https://github.com/Xikin/oficina-auth-lambda) | Function serverless de autenticação por CPF + API Gateway |
 | [oficina-infra-k8s](https://github.com/Xikin/oficina-infra-k8s) | VPC + cluster EKS + metrics-server |
 | **oficina-infra-db** (este) | RDS PostgreSQL gerenciado |
